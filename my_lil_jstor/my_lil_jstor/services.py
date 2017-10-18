@@ -21,7 +21,6 @@ def get_coloring_book(primary_key):
 def like_coloring_book(primary_key):
     coloring_book = ColoringBook.objects.get(pk=primary_key)
     coloring_book.likes = coloring_book.likes + 1
-    print(coloring_book.likes)
     coloring_book.save()
     return coloring_book.likes
 
@@ -40,11 +39,11 @@ def get_books():
         books.append(coloring_book_dict)
     return books
 
-def insert_coloring_book_comment(user, comment, bookId):
+def insert_coloring_book_comment(name, comment, bookId):
     comment = Comment(comment=comment, name=name, book=ColoringBook.objects.get(pk=bookId))
     comment.save()
     return {
-        'user': comment.user,
+        'name': comment.name,
         'comment': comment.comment
     }
 
@@ -58,13 +57,13 @@ def get_coloring_book_comments(bookId):
     for comment in comments:
         if(comment.rating != 0): 
             comments2.append({
-            'user': comment.user,
+            'name': comment.name,
             'comment': comment.comment,
             'rating': comment.rating
             })
         else:
             comments2.append({
-            'user': comment.user,
+            'name': comment.name,
             'comment': comment.comment,
             })
     return comments2

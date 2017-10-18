@@ -10,7 +10,6 @@ from .services import change_coloring_book_price
 def coloring_books(request, book_id):
     coloring_book = get_coloring_book(book_id)
     comments = get_coloring_book_comments(book_id)
-    print(comments)
     context = {
         'book': coloring_book,
         'comments': comments
@@ -41,9 +40,11 @@ def browse(request):
     return render(request, 'browse.html', context)
 
 def likeBook(request):
-    print("hellohellohleoo")
+    print(request)
+    bookid = request.POST.get('bookId')
     likes = like_coloring_book(request.POST.get('bookId'))
     '''change_coloring_book_price(request.POST.get('bookId'), 0.25)'''
+    print("hellohellohleooasfsfdasf")
     return JsonResponse({
         'likes': likes
     })

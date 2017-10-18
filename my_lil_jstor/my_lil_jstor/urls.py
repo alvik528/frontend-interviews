@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^purchase/(?P<book_id>[0-9]+)', views.purchase, name='purchase'),
     url(r'^browse', views.browse, name='browse'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^coloringbook/like', views.likeBook, name="like"),
+    url(r'^coloringbook/comment', views.commentBook, name="comment"),
     url(r'^', views.home, name='home'),
-    url(r'^coloringbook/(?P<book_id>[0-9]+)/like', views.likeBook, name="like"),
-    url(r'^coloringbook/(?P<book_id>[0-9]+)/comment', views.commentBook, name="comment"),
 ]

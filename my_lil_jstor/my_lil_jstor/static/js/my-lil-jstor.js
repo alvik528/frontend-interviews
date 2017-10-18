@@ -14,11 +14,9 @@ $( document ).ready(function() {
             }
         });
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-        console.log(csrftoken);
         $.ajax({
             url: 'like',
             type: 'post',
-            contentType: "application/json; charset=utf-8",
             data: {
                 bookId: bookId
             },
@@ -47,7 +45,6 @@ $( document ).ready(function() {
         $.ajax({
             url: 'comment',
             type: 'post',
-            contentType: "application/json; charset=utf-8",
             data:  {
                 bookId: bookId,
                 name: name,
