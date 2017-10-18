@@ -11,7 +11,34 @@
         <h2>{{ book.description }}</h2>
         <div>Published: {{ book.pub_date }}</div>
         <hr />
-        <div class="medium-heading">Price: ${{ book.price }}</div>
-        <a class="button" href="{% url 'purchase' book.id %}">Buy Now</a>
+
+        <div class="like">
+            {% csrf_token %}
+            <img src="../static/images/likeIcon.png" aria-hidden="true" onclick="liked({{book.id}})">
+            <p class="count">Likes: {{book.likes}} </p>
+        </div>
+        <div class="buy">
+            <div class="medium-heading">Price: ${{ book.price }}</div>
+            <a class="button" href="{% url 'purchase' book.id %}">Buy Now</a>
+        </div> 
+
+        <form id="comment-form" action="comment" method="post">
+            {% csrf_token %}
+            <input id="name" type="text" name="name" placeholder="Name" required>
+            <textarea id="comment-body" name="comment" placeholder="Enter comment" required></textarea>
+            <input id="book-id-value" type="hidden" name="bookId" value="{{book.id}}">
+            <input class="btn btn-success" type="submit" value="Add Comment">
+        </form>
+
+        <br>
+        <h2>Comments</h2>
+        <div class="comments-section">
+        {% for comment in comments %}
+            <div class="comment">
+                <h3>{{comment.user}}</h5>
+                {{comment.comment}}
+            </div>
+        {% endfor %}
+        </div>
     </div>
 {% endblock %}
